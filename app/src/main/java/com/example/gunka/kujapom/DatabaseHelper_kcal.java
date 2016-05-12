@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by atomath on 14/3/59.
  */
 
+/*Hello You*/
+
 public class DatabaseHelper_kcal extends SQLiteOpenHelper {
 
     //declare Database Name
