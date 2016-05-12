@@ -93,7 +93,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         String type = actv.getText().toString();
                       //  Log.i("cp", "key : "+type +" value : "+c.getString(API_NAME).toString()+" and : "+"blah blah blah".contains("blah"));
 
-                        if(type.toLowerCase().contains(c.getString(API_NAME).toLowerCase())) {
+                        if(c.getString(API_NAME).toLowerCase().contains(type.toLowerCase())) {
                            // Log.i("cp", "eiei");
                             HashMap<String, String> map = new HashMap<String, String>();
                             map.put(API_ID, c.getString(API_ID));
