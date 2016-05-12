@@ -27,7 +27,6 @@ import java.util.HashMap;
  */
 public class KcalFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    //start api value
     private static final String API_ID = "Menu_ID";
     private static final String API_NAME = "Menu_Name";
     private static final String API_CAL = "Menu_Cal";
@@ -37,19 +36,13 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     private JSONParser jParser;
     private JSONArray json;
 
-    //end api
-   // private static final String NAME = "menu_name";
-    //private static final String CAL = "menu_cal";
-    //private static final String TYPE = "menu_type";
     private Spinner spinner;
     private AutoCompleteTextView actv;
-    private static final String[] paths = {"ทั้งหมด","อาหารจานเดียว/กับข้าว", "ของหวาน", "ผลไม้", "เครื่องดื่ม", "อื่นๆ"};
+    private static final String[] paths = {"---เลือกประเภท---","อาหารจานเดียว/กับข้าว", "ของหวาน", "ผลไม้", "เครื่องดื่ม", "อื่นๆ","ทั้งหมด"};
 
-    //private static final String PRICE = "menu_price";
+
     private ListView listview;
-    //DatabaseHelper_kcal myDB;
-    //private ArrayList<HashMap<String, String>> arraylist;
-    //private Cursor c;
+
 
 
     public KcalFragment() {
@@ -93,28 +86,10 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         switch (position) {
             case 0:
-                Log.i("cp", "hi!");
+                //Log.i("cp", "hi!");
 
 
-                /*jsonlist = new ArrayList<HashMap<String, String>>();
-                for (int i = 0; i < json.length(); i++) {
-                    try {
-                        JSONObject c = json.getJSONObject(i);
-                        int type = Integer.parseInt(c.getString(API_TYPE).toString());
 
-                            HashMap<String, String> map = new HashMap<String, String>();
-                            map.put(API_ID, c.getString(API_ID));
-                            map.put(API_NAME, c.getString(API_NAME));
-                            map.put(API_CAL, c.getString(API_CAL));
-                            map.put(API_TYPE, c.getString(API_TYPE));
-                            jsonlist.add(map);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
-            */
                 break;
             case 1:
 
@@ -223,6 +198,27 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
+            case 6:
+                jsonlist = new ArrayList<HashMap<String, String>>();
+                for (int i = 0; i < json.length(); i++) {
+                    try {
+                        JSONObject c = json.getJSONObject(i);
+                        int type = Integer.parseInt(c.getString(API_TYPE).toString());
+
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(API_ID, c.getString(API_ID));
+                        map.put(API_NAME, c.getString(API_NAME));
+                        map.put(API_CAL, c.getString(API_CAL));
+                        map.put(API_TYPE, c.getString(API_TYPE));
+                        jsonlist.add(map);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+
+                break;
 
         }
     }
@@ -279,11 +275,9 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         @Override
         protected void onPostExecute(ArrayList<HashMap<String, String>> s) {
             super.onPostExecute(s);
-            Log.i("mobile", "onPostExecute: "+s);
+            Log.i("mobile", "onPostExecute: " + s);
             listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s)));
 
         }
     }
-
-
 }
