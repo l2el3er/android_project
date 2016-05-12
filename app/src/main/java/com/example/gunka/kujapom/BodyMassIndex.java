@@ -1,5 +1,5 @@
 package com.example.gunka.kujapom;
-
+// eiei
 import android.app.Activity;
 import android.app.Fragment;
 import android.net.Uri;
