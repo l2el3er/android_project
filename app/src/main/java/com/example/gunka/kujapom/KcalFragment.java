@@ -91,7 +91,10 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                     try {
                         JSONObject c = json.getJSONObject(i);
                         String type = actv.getText().toString();
-                        if(type==c.getString(API_NAME)) {
+                      //  Log.i("cp", "key : "+type +" value : "+c.getString(API_NAME).toString()+" and : "+"blah blah blah".contains("blah"));
+
+                        if(type.toLowerCase().contains(c.getString(API_NAME).toLowerCase())) {
+                           // Log.i("cp", "eiei");
                             HashMap<String, String> map = new HashMap<String, String>();
                             map.put(API_ID, c.getString(API_ID));
                             map.put(API_NAME, c.getString(API_NAME));
