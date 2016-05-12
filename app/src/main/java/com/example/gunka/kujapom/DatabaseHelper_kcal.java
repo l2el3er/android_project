@@ -1,6 +1,6 @@
 package com.example.gunka.kujapom;
 
-
+//test 03
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
