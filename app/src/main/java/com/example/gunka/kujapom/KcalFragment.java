@@ -1,6 +1,5 @@
 package com.example.gunka.kujapom;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -43,12 +43,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
 
 
     private ListView listview;
-
+    private ImageButton btnSearch;
 
 
     public KcalFragment() {
         // Required empty public constructor
     }
+
+
 
 
     @Override
@@ -63,11 +65,13 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         spinner = (Spinner) v.findViewById(R.id.spinner1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, paths);
+
         actv = (AutoCompleteTextView) v.findViewById(R.id.autoCompleteTextView1);
+        btnSearch = (ImageButton) v.findViewById(R.id.btnSearch);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
+        setWidgetEventListener();
 
 
         return v;
@@ -75,13 +79,37 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
 
     }
 
-    public void showMessage(String title, String Message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
+    private void setWidgetEventListener() {
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("cp", actv.getText().toString());
+
+                jsonlist = new ArrayList<HashMap<String, String>>();
+                for (int i = 0; i < json.length(); i++) {
+                    try {
+                        JSONObject c = json.getJSONObject(i);
+                        String type = actv.getText().toString();
+                        if(type==c.getString(API_NAME)) {
+                            HashMap<String, String> map = new HashMap<String, String>();
+                            map.put(API_ID, c.getString(API_ID));
+                            map.put(API_NAME, c.getString(API_NAME));
+                            map.put(API_CAL, c.getString(API_CAL));
+                            map.put(API_TYPE, c.getString(API_TYPE));
+                            jsonlist.add(map);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+
+            }
+        });
+
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
@@ -290,6 +318,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
             super.onPostExecute(s);
             Log.i("mobile", "onPostExecute: " + s);
             actv.setAdapter(adapter);
+
             listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s)));
 
         }
