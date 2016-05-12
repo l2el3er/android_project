@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -86,9 +87,6 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         switch (position) {
             case 0:
-                //Log.i("cp", "hi!");
-
-
 
                 break;
             case 1:
@@ -231,6 +229,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     public class FeedAsynTask extends AsyncTask<String, Void, ArrayList<HashMap<String, String>>> {
 
 
+        private ArrayAdapter<String> adapter;
 
         @Override
         protected void onPreExecute() {
@@ -249,17 +248,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 try {
 
                     JSONObject c = json.getJSONObject(i);
-                    String mid = c.getString(API_ID);
-                    String mpic = c.getString(API_NAME);
-                    String mname = c.getString(API_CAL);
-                    String mprice = c.getString(API_TYPE);
+
 
                     HashMap<String, String> map = new HashMap<String, String>();
 
-                    map.put(API_ID, mid);
-                    map.put(API_NAME, mpic);
-                    map.put(API_CAL, mname);
-                    map.put(API_TYPE, mprice);
+                    map.put(API_ID, c.getString(API_ID));
+                    map.put(API_NAME, c.getString(API_NAME));
+                    map.put(API_CAL, c.getString(API_CAL));
+                    map.put(API_TYPE, c.getString(API_TYPE));
                     jsonlist.add(map);
 
                 } catch (JSONException e) {
@@ -267,6 +263,23 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 }
             }
 
+
+            ////
+            List<String> arrayname = new ArrayList<String>();
+
+            for (int i = 0; i < json.length(); i++) {
+                try {
+                    JSONObject c = json.getJSONObject(i);
+                    arrayname.add(c.getString(API_NAME));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+             adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayname);
+           
+
+
+            ////
             Log.i("mobile", "doInBackground: "+jsonlist.toString());
             return jsonlist;
 
@@ -276,6 +289,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         protected void onPostExecute(ArrayList<HashMap<String, String>> s) {
             super.onPostExecute(s);
             Log.i("mobile", "onPostExecute: " + s);
+            actv.setAdapter(adapter);
             listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s)));
 
         }
