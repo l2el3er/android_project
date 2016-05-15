@@ -1,11 +1,14 @@
 package com.example.gunka.kujapom;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -21,6 +24,12 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by gunka on 28-Apr-16.
  */
@@ -29,6 +38,8 @@ public class FeedTwoFragment extends Fragment {
     CallbackManager callbackManager;
     private LoginButton loginButton;
     private TextView info;
+    private ImageView imageView;
+    private Bitmap bitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,21 +53,32 @@ public class FeedTwoFragment extends Fragment {
         callbackManager = CallbackManager.Factory.create();
         info = (TextView) v.findViewById(R.id.info);
         loginButton = (LoginButton) v.findViewById(R.id.login_button);
+        imageView = (ImageView) v.findViewById(R.id.profile);
+
+
         loginButton.setFragment(this);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object,GraphResponse response) {
-                                try {
-                                    info.setText("Hi, " + object.getString("name"));
-                                } catch(JSONException ex) {
-                                    ex.printStackTrace();
-                                }
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object,GraphResponse response) {
+                            try {
+                                //String profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                //info.setText("สวัสดี, " + object.getJSONObject("picture").getJSONObject("data").getString("url"));
+                                //URL image_value = new URL("http://graph.facebook.com/"+id+"/picture" );
+
+                                String id = object.getString("id");
+                                String url = "http://graph.facebook.com/"+id+"/picture";
+                                //bitmap = getBitmapFromURL(url);
+                                //imageView.setImageBitmap(bitmap);
+                                info.setText("สวัสดี, " + object.getString("name") + url);
+                            } catch(JSONException ex) {
+                                ex.printStackTrace();
                             }
-                        });
+                        }
+                    });
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender, birthday");
                 request.setParameters(parameters);
@@ -79,6 +101,24 @@ public class FeedTwoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public Bitmap getBitmapFromURL(String src){
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBit = BitmapFactory.decodeStream(input);
+            return myBit;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
