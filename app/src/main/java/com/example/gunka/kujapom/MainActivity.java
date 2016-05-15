@@ -43,7 +43,18 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        final int[] ICONS = new int[] {
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+                R.mipmap.ic_launcher,
+        };
 
+        //TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.getTabAt(0).setIcon(ICONS[0]);
+        tabLayout.getTabAt(1).setIcon(ICONS[1]);
+        tabLayout.getTabAt(2).setIcon(ICONS[2]);
         myDB = new DatabaseHelper(this);
 
 
