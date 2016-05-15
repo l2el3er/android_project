@@ -9,8 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <AutoCompleteTextView
@@ -28,17 +27,21 @@
             android:src="@drawable/search"/>
 
     </LinearLayout>
-
-
-    <ListView
-        android:id="@+id/listview"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer">
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#00000000"
         android:cacheColorHint="#00000000"
         android:divider="@null"
         android:drawSelectorOnTop="false"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <Spinner
         android:id="@+id/spinner1"
