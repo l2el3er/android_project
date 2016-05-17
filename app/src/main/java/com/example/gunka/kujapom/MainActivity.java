@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         final int[] ICONS = new int[] {
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher,
+                R.drawable.cal,
+                R.drawable.exercise,
+                R.drawable.food,
         };
 
         //TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -118,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "ออกกำลังกาย";
+                    return "คำนวณมวลกาย";
                 case 1:
-                    return "ตารางอาหาร";
+                    return "ออกกำลังกาย";
                 case 2:
-                    return "แคลลอรี่";
+                    return "ตารางอาหารี่";
             }
             return null;
         }
