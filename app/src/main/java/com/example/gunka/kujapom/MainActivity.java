@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     return "ออกกำลังกาย";
                 case 2:
-                    return "ตารางอาหารี่";
+                    return "ตารางอาหาร";
             }
             return null;
         }
