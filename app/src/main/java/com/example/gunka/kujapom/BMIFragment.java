@@ -3,6 +3,7 @@ package com.example.gunka.kujapom;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,10 @@ public class BMIFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Integer.parseInt(String.valueOf(EditText01.length()))==0&&Integer.parseInt(String.valueOf(EditText02.length()))==0){
+                    Log.i("cp", "null");
+                    return;
+                }
                 Float a1 = (float) (Float.parseFloat(EditText01.getText().toString()));
                 Float b1 = (float) (Float.parseFloat(EditText02.getText().toString()));
                 Float c1 = (float) (b1 * b1) / 10000;

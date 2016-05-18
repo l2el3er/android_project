@@ -84,7 +84,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("cp", actv.getText().toString());
+                Log.i("cp", "hi");
+                Log.i("cp", String.valueOf(actv.length()));
+                //Log.i("cp", actv.getText().toString());
+                //Integer.parseInt(String.valueOf(actv.length()))
+            if(Integer.parseInt(String.valueOf(actv.length()))==0){
+                    Log.i("cp", "null");
+                return;
+                }
 
                 jsonlist = new ArrayList<HashMap<String, String>>();
                 for (int i = 0; i < json.length(); i++) {
