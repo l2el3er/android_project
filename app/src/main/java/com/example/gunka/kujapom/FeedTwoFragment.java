@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -65,15 +66,10 @@ public class FeedTwoFragment extends Fragment {
                         @Override
                         public void onCompleted(JSONObject object,GraphResponse response) {
                             try {
-                                //String profilePicUrl = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                                //info.setText("สวัสดี, " + object.getJSONObject("picture").getJSONObject("data").getString("url"));
-                                //URL image_value = new URL("http://graph.facebook.com/"+id+"/picture" );
-
                                 String id = object.getString("id");
                                 String url = "http://graph.facebook.com/"+id+"/picture";
-                                //bitmap = getBitmapFromURL(url);
-                                //imageView.setImageBitmap(bitmap);
-                                info.setText("สวัสดี, " + object.getString("name") + url);
+                                info.setText("สวัสดี, " + object.getString("name"));
+                                Glide.with(getActivity()).load(url).placeholder(R.drawable.unloadimage).into(imageView);
                             } catch(JSONException ex) {
                                 ex.printStackTrace();
                             }
