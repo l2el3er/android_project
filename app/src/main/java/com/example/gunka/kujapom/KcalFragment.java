@@ -2,6 +2,7 @@ package com.example.gunka.kujapom;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,13 +23,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KcalFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
+public class KcalFragment extends Fragment implements AdapterView.OnItemSelectedListener,TextToSpeech.OnInitListener {
+    private TextToSpeech tts;
     private static final String API_ID = "Menu_ID";
     private static final String API_NAME = "Menu_Name";
     private static final String API_CAL = "Menu_Cal";
@@ -57,7 +60,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        tts = new TextToSpeech(getActivity(), this);
         View v = inflater.inflate(R.layout.fragment_kcal, container, false);
         listview = (ListView) v.findViewById(R.id.listview);
         new FeedAsynTask().execute("http://10.16.68.253/kcal.php?type=");
@@ -76,32 +79,28 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
 
         return v;
 
-
     }
 
     private void setWidgetEventListener() {
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
+            public static final int RESULT_SPEECH = 1;
+
             @Override
             public void onClick(View v) {
-                Log.i("cp", "hi");
-                Log.i("cp", String.valueOf(actv.length()));
-                //Log.i("cp", actv.getText().toString());
-                //Integer.parseInt(String.valueOf(actv.length()))
+
             if(Integer.parseInt(String.valueOf(actv.length()))==0){
-                    Log.i("cp", "null");
+                    Log.i("cp", "no input data");
                 return;
                 }
-
+                tts.speak(actv.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                 jsonlist = new ArrayList<HashMap<String, String>>();
                 for (int i = 0; i < json.length(); i++) {
                     try {
                         JSONObject c = json.getJSONObject(i);
                         String type = actv.getText().toString();
-                      //  Log.i("cp", "key : "+type +" value : "+c.getString(API_NAME).toString()+" and : "+"blah blah blah".contains("blah"));
 
                         if(c.getString(API_NAME).toLowerCase().contains(type.toLowerCase())) {
-                           // Log.i("cp", "eiei");
                             HashMap<String, String> map = new HashMap<String, String>();
                             map.put(API_ID, c.getString(API_ID));
                             map.put(API_NAME, c.getString(API_NAME));
@@ -116,6 +115,8 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
             }
+
+
         });
 
     }
@@ -264,6 +265,15 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
 
     }
 
+    @Override
+    public void onInit(int status) {
+        if(status == TextToSpeech.SUCCESS) {
+            tts.setLanguage(new Locale("th"));
+            Log.i("cp", "well done !");
+            Toast.makeText(getActivity(), "tts is ready", Toast.LENGTH_SHORT).show();
+           }
+    }
+
     public class FeedAsynTask extends AsyncTask<String, Void, ArrayList<HashMap<String, String>>> {
 
 
@@ -314,7 +324,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 }
             }
              adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,arrayname);
-           
+
 
 
             ////
@@ -333,4 +343,5 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
 
         }
     }
+
 }
