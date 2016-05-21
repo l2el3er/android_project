@@ -63,6 +63,21 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         tts = new TextToSpeech(getActivity(), this);
         View v = inflater.inflate(R.layout.fragment_kcal, container, false);
         listview = (ListView) v.findViewById(R.id.listview);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position,
+                                    long id) {
+
+                ListViewAdapter_kcal.viewHolder holder = (ListViewAdapter_kcal.viewHolder) v.getTag();
+
+                //holder.
+                //title = holder.
+                String text = holder.title.getText().toString() + holder.Description.getText();
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+                // Log.i("listview", "set : "+"onItemClick: "+holder.title.getText()+holder.Description.getText()+ " กิโลแคลอรี่");
+               }
+        });
         new FeedAsynTask().execute("http://10.16.68.253/kcal.php?type=");
 
         spinner = (Spinner) v.findViewById(R.id.spinner1);
@@ -93,7 +108,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                     Log.i("cp", "no input data");
                 return;
                 }
-                tts.speak(actv.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak("ค้นหา"+actv.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
                 jsonlist = new ArrayList<HashMap<String, String>>();
                 for (int i = 0; i < json.length(); i++) {
                     try {
@@ -272,6 +287,11 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
             Log.i("cp", "well done !");
             Toast.makeText(getActivity(), "tts is ready", Toast.LENGTH_SHORT).show();
            }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        tts.shutdown();
     }
 
     public class FeedAsynTask extends AsyncTask<String, Void, ArrayList<HashMap<String, String>>> {

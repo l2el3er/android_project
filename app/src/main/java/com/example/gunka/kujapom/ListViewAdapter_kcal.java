@@ -44,7 +44,7 @@ public class ListViewAdapter_kcal extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -69,14 +69,11 @@ public class ListViewAdapter_kcal extends BaseAdapter {
 
         }
         HashMap<String, String> item = mData.get(position);
+
         holder.title.setText(item.get("Menu_Name"));
         holder.Description.setText(item.get("Menu_Cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(item.get("Menu_Type").toString());
-       /* HashMap<String, String> item = mData.get(position);
-        holder.title.setText(item.get("menu_name"));
-        holder.Description.setText(item.get("menu_cal") + " กิโลแคลอรี่");
-        int myNum = Integer.parseInt(item.get("menu_type").toString());*/
-        switch (myNum) {
+         switch (myNum) {
             case 1:
                 holder.productPicture.setImageResource(R.drawable.ico_cate1);
                 break;
