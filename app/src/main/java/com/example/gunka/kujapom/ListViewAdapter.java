@@ -1,13 +1,16 @@
 package com.example.gunka.kujapom;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.codemobiles.util.CMXmlJsonConvertor;
+
+import java.util.ArrayList;
 
 /**
  * Created by gunka on 25-Feb-16.
@@ -16,20 +19,18 @@ public class ListViewAdapter extends BaseAdapter {
 
     public Context mContext;
     public LayoutInflater mInflater;
-    DatabaseHelper myDB;
-    int i = 0;
+    ArrayList<Object> result;
 
 
-    public ListViewAdapter(Context context, DatabaseHelper MyDB) {
-        myDB = MyDB;
+    public ListViewAdapter(Context context, ArrayList<Object> s) {
+        result = s;
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public int getCount() {
-        Cursor res = myDB.getAllData();
-        return res.getCount();
+        return result.size();
     }
 
     @Override
@@ -62,20 +63,20 @@ public class ListViewAdapter extends BaseAdapter {
             holder = (viewHolder) convertView.getTag();
 
         }
-        Cursor item = myDB.getById(String.valueOf(position));
-        while (item.moveToNext()) {
-            holder.title.setText(item.getString(1));
-            holder.Description.setText(item.getString(3) + " กิโลแคลอรี่");
-            int myNum = Integer.parseInt(item.getString(2).toString());
-            switch (myNum) {
-                case 1:
-                    holder.productPicture.setImageResource(R.drawable.ico_burn1);
-                    break;
-                case 2:
-                    holder.productPicture.setImageResource(R.drawable.ico_burn2);
-                    break;
-            }
+
+        Object item = result.get(position);
+        holder.title.setText(CMXmlJsonConvertor.getValue(item,"name"));
+        holder.Description.setText(CMXmlJsonConvertor.getValue(item,"cal") + " กิโลแคลอรี่");
+        int myNum = Integer.parseInt(CMXmlJsonConvertor.getValue(item,"type"));
+        switch (myNum) {
+            case 1:
+                holder.productPicture.setImageResource(R.drawable.ico_burn1);
+                break;
+            case 2:
+                holder.productPicture.setImageResource(R.drawable.ico_burn2);
+                break;
         }
+
 
         return convertView;
     }
@@ -85,4 +86,5 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView productPicture;
         TextView Description;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.gunka.kujapom;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.codemobiles.util.CMFeedJsonUtil;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.RequestBody;
+
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -19,7 +25,6 @@ import java.util.Locale;
 public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitListener{
     private TextToSpeech tts;
     private ListView listview;
-    DatabaseHelper myDB;
 
     public FeedOneFragment() {
         // Required empty public constructor
@@ -49,14 +54,47 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
             }
         });
 
-        myDB = new DatabaseHelper(getActivity());
         feedData();
         return v;
     }
 
     private void feedData() {
-        listview.setAdapter(new ListViewAdapter(getActivity(), myDB));
+
+        new FeedAsyncTask().execute("http://10.16.68.253/kexercise.php");
     }
+
+    public class FeedAsyncTask extends AsyncTask<String ,Void ,ArrayList<Object>>{
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+
+            Toast.makeText(getActivity(), "Connecting..", Toast.LENGTH_LONG).show();
+            Log.i("codemobiles","onPreExecute");
+        }
+
+        @Override
+        protected ArrayList<Object> doInBackground(String... params) {
+            Log.i("codemobiles","doInBackground: "  + params[0]);
+            RequestBody request = new FormEncodingBuilder().add("type","json").build();
+            ArrayList<Object> result = CMFeedJsonUtil.feed(params[0], request);
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Object> s) {
+
+            super.onPostExecute(s);
+            Log.i("codemobiles", "onPostExecute");
+            if(s != null){
+                Toast.makeText(getActivity(), "size: " + s.size(), Toast.LENGTH_LONG).show();
+                listview.setAdapter(new ListViewAdapter(getActivity(), new ArrayList<Object>(s)));
+            }
+
+        }
+    }
+
+
 
     @Override
     public void onInit(int status) {
