@@ -140,8 +140,9 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
             super.onPostExecute(s);
             Log.i("codemobiles", "onPostExecute");
             if(s != null){
+                sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
                 Toast.makeText(getActivity(), "size: " + s.size(), Toast.LENGTH_LONG).show();
-                listview.setAdapter(new ListViewAdapter(getActivity(), new ArrayList<Object>(s)));
+                listview.setAdapter(new ListViewAdapter(getActivity(), new ArrayList<Object>(s),sharedPreferences.getString("username", "")));
             }
 
         }
