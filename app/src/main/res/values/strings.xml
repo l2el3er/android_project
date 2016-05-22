@@ -20,5 +20,6 @@
         <item>เครื่องดื่ม</item>
         <item>อื่นๆ</item>
     </string-array>
+    <string name="title_activity_tab_edit">TabEditActivity</string>
 
 </resources>

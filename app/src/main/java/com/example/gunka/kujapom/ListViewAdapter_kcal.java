@@ -51,7 +51,7 @@ public class ListViewAdapter_kcal extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         viewHolder holder = null;
-
+        HashMap<String, String> item = mData.get(position);
         if (convertView == null) {
             // load layout
             convertView = mInflater.inflate(R.layout.item_listview, null);
@@ -60,7 +60,8 @@ public class ListViewAdapter_kcal extends BaseAdapter {
             holder.title = (TextView) convertView.findViewById(R.id.item_listview_title);
             holder.productPicture = (ImageView) convertView.findViewById(R.id.item_listview_productPicture);
             holder.Description = (TextView) convertView.findViewById(R.id.item_listview_desc);
-            convertView.setTag(holder);
+
+
 
 
         } else {
@@ -68,8 +69,8 @@ public class ListViewAdapter_kcal extends BaseAdapter {
             holder = (viewHolder) convertView.getTag();
 
         }
-        HashMap<String, String> item = mData.get(position);
-
+        holder.ID = item.get("Menu_ID");
+        convertView.setTag(holder);
         holder.title.setText(item.get("Menu_Name"));
         holder.Description.setText(item.get("Menu_Cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(item.get("Menu_Type").toString());
@@ -100,6 +101,7 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         TextView title;
         ImageView productPicture;
         TextView Description;
+        String ID;
     }
 }
 
