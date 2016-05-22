@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         tabLayout.getTabAt(0).setIcon(ICONS[0]);
-        tabLayout.getTabAt(1).setIcon(ICONS[1]);
-        tabLayout.getTabAt(2).setIcon(ICONS[2]);
+        tabLayout.getTabAt(1).setIcon(ICONS[0]);
+        tabLayout.getTabAt(2).setIcon(ICONS[1]);
+        tabLayout.getTabAt(3).setIcon(ICONS[2]);
         myDB = new DatabaseHelper(this);
 
 
@@ -113,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     return new BMIFragment();
                 case 1:
+                    return new BMRFragment();
+                case 2:
                     return new FeedOneFragment();
                 default:
                     return new KcalFragment();
@@ -122,18 +125,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "คำนวณมวลกาย";
+                    return "BMI";
                 case 1:
-                    return "ออกกำลังกาย";
+                    return "BMR";
                 case 2:
-                    return "ตารางอาหาร";
+                    return "Exercise";
+                case 3:
+                    return "food";
             }
             return null;
         }

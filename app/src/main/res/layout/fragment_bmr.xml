@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <!--Title-->
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Calculate BMR"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <!--Contents-->
+    <ScrollView
+        android:id="@+id/scrContent"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/linContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <!--Insert Gender-->
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gender"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:text="male"/>
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:text="female"/>
+            </RadioGroup>
+
+
+            <!--Insert Height-->
+            <TextView
+                android:id="@+id/txtHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Height (cm.)"/>
+            <EditText
+                android:id="@+id/edtHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginLeft="70dp"
+                android:hint="168 cm."/>
+
+            <!--Insert Weight-->
+            <TextView
+                android:id="@+id/txtWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Weight (kg.)"/>
+            <EditText
+                android:id="@+id/edtWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginLeft="70dp"
+                android:hint="48 kg."/>
+
+            <!--Insert Age-->
+            <TextView
+                android:id="@+id/txtAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Age (years)"/>
+            <EditText
+                android:id="@+id/edtAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_marginLeft="70dp"
+                android:hint="22 years"/>
+
+            <!--Insert Activity-->
+            <TextView
+                android:id="@+id/txtActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Activity"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radActivity1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Not or very less exercise"
+                    android:layout_marginLeft="70dp"/>
+                <RadioButton
+                    android:id="@+id/radActivity2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="less exercise (1-3 days/week)"
+                    android:layout_marginLeft="70dp"/>
+                <RadioButton
+                    android:id="@+id/radActivity3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Moderate exercise (3-5 days/week)"
+                    android:layout_marginLeft="70dp"/>
+                <RadioButton
+                    android:id="@+id/radActivity4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hard exercise (6-7 days/week)"
+                    android:layout_marginLeft="70dp"/>
+                <RadioButton
+                    android:id="@+id/radActivity5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="very heavy exercise or sportsman"
+                    android:layout_marginLeft="70dp"/>
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtTitle"
+        android:layout_marginTop="370dp"
+        android:text="C A L C U L A T E"/>
+</RelativeLayout>
