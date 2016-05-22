@@ -1,8 +1,9 @@
 package com.example.gunka.kujapom;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 
 public class FacebookLogin extends AppCompatActivity {
 
+
     CallbackManager callbackManager;
     private LoginButton loginButton;
     private TextView info;
@@ -38,10 +40,10 @@ public class FacebookLogin extends AppCompatActivity {
         info = (TextView) findViewById(R.id.info);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         imageView = (ImageView) findViewById(R.id.profile);
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                Log.i("facebookLogin", "well done3 !");
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -64,11 +66,13 @@ public class FacebookLogin extends AppCompatActivity {
 
             @Override
             public void onCancel() {
+                Log.i("facebookLogin", "well done4 !");
                 info.setText("Login attempt canceled.");
             }
 
             @Override
             public void onError(FacebookException e) {
+                Log.i("facebookLogin", "well done5 !");
                 info.setText("Login attempt failed.");
             }
         });
@@ -76,6 +80,7 @@ public class FacebookLogin extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("fb", "well done6 !");
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
