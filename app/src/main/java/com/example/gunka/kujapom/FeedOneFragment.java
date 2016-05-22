@@ -1,5 +1,7 @@
 package com.example.gunka.kujapom;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -52,6 +54,41 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
 
                 // Log.i("listview", "set : "+"onItemClick: "+holder.title.getText()+holder.Description.getText()+ " กิโลแคลอรี่");
             }
+        });
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final ListViewAdapter.viewHolder holder = (ListViewAdapter.viewHolder) view.getTag();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                Log.i("cp", "need to delete item ID : " + getID());
+                                //
+                                //  DO SOMETHING
+                                //
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+
+                    private String getID() {
+                        return holder.ID;
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("ต้องการที่จะลบ ?").setPositiveButton("ใช่", dialogClickListener)
+                        .setNegativeButton("ไม่", dialogClickListener).show();
+                return false;
+            }
+
+            ;
         });
 
         feedData();

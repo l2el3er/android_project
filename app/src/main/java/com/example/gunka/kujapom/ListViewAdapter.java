@@ -46,7 +46,7 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         viewHolder holder = null;
-
+        Object item = result.get(position);
         if (convertView == null) {
             // load layout
             convertView = mInflater.inflate(R.layout.item_listview_kcal, null);
@@ -55,7 +55,7 @@ public class ListViewAdapter extends BaseAdapter {
             holder.title = (TextView) convertView.findViewById(R.id.item_listview_title);
             holder.productPicture = (ImageView) convertView.findViewById(R.id.item_listview_productPicture);
             holder.Description = (TextView) convertView.findViewById(R.id.item_listview_desc);
-            convertView.setTag(holder);
+
 
 
         } else {
@@ -64,7 +64,8 @@ public class ListViewAdapter extends BaseAdapter {
 
         }
 
-        Object item = result.get(position);
+        holder.ID = CMXmlJsonConvertor.getValue(item,"id");
+        convertView.setTag(holder);
         holder.title.setText(CMXmlJsonConvertor.getValue(item,"name"));
         holder.Description.setText(CMXmlJsonConvertor.getValue(item,"cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(CMXmlJsonConvertor.getValue(item,"type"));
@@ -85,6 +86,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView title;
         ImageView productPicture;
         TextView Description;
+        String ID;
     }
 
 }
