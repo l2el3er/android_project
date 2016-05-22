@@ -6,4 +6,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="facebook_app_id">224090167964630</string>
+
+    <string name="exercise_prompt">เลือกประเภท</string>
+    <string-array name="exercise_type">
+        <item>การออกกำลัง</item>
+        <item>กิจกรรมทั่วไป</item>
+    </string-array>
+
+    <string-array name="food_type">
+        <item>อาหารจานเดียว</item>
+        <item>ของหวาน</item>
+        <item>ผลไม้</item>
+        <item>เครื่องดื่ม</item>
+        <item>อื่นๆ</item>
+    </string-array>
+
 </resources>

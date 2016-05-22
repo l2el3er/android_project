@@ -2,9 +2,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_login"
         android:orderInCategory="100"
         android:title="เข้าสู่ระบบ"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_insertFood"
+        android:orderInCategory="100"
+        android:title="เพิ่มเมนู"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_insertExercise"
+        android:orderInCategory="100"
+        android:title="เพิ่มท่าออกกำลังกาย"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_myOrder"
+        android:orderInCategory="100"
+        android:title="แก้ไข"
+        app:showAsAction="never" />
+
 </menu>

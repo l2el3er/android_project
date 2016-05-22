@@ -77,7 +77,16 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_login) {
+            startActivity(new Intent(getApplicationContext(), FacebookLogin.class));
+            return true;
+        } else if(id == R.id.action_insertFood) {
+            startActivity(new Intent(getApplicationContext(), InsertFood.class));
+            return true;
+        } else if(id == R.id.action_insertExercise) {
+            startActivity(new Intent(getApplicationContext(), InsertExercise.class));
+            return true;
+        } else if(id == R.id.action_myOrder) {
             startActivity(new Intent(getApplicationContext(), FacebookLogin.class));
             return true;
         }

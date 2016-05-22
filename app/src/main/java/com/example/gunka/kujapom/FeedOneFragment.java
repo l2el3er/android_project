@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codemobiles.util.CMFeedJsonUtil;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -68,6 +69,7 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
         protected void onPreExecute(){
             super.onPreExecute();
 
+            Toast.makeText(getActivity(), "Connecting..", Toast.LENGTH_LONG).show();
             Log.i("codemobiles","onPreExecute");
         }
 
@@ -85,6 +87,7 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
             super.onPostExecute(s);
             Log.i("codemobiles", "onPostExecute");
             if(s != null){
+                Toast.makeText(getActivity(), "size: " + s.size(), Toast.LENGTH_LONG).show();
                 listview.setAdapter(new ListViewAdapter(getActivity(), new ArrayList<Object>(s)));
             }
 
@@ -98,6 +101,7 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
         if(status == TextToSpeech.SUCCESS) {
             tts.setLanguage(new Locale("th"));
             Log.i("cp", "well done !");
+            Toast.makeText(getActivity(), "tts is ready", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
