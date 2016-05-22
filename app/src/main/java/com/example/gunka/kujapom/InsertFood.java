@@ -47,9 +47,13 @@ public class InsertFood extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sharedPreferences = getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
                 if (Integer.parseInt(String.valueOf(EdtName.length())) == 0 || Integer.parseInt(String.valueOf(EdtCal.length())) == 0) {
                     Log.i("insertExercise", "1");
                     Toast.makeText(getApplicationContext(), "กรุณากรอกให้ครบ", Toast.LENGTH_LONG).show();
+                    return;
+                } else if(sharedPreferences.getString("username", "")==""){
+                    Toast.makeText(getApplicationContext(), "กรุณาเข้าสู่", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     Log.i("insertExercise", "2 : " + String.valueOf(type.getSelectedItem()));
