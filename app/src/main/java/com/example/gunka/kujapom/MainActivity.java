@@ -87,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
         } else if(id == R.id.action_insertExercise) {
             startActivity(new Intent(getApplicationContext(), InsertExercise.class));
             return true;
-        } else if(id == R.id.action_myOrder) {
-            startActivity(new Intent(getApplicationContext(), FacebookLogin.class));
-            return true;
         }
 
         return super.onOptionsItemSelected(item);

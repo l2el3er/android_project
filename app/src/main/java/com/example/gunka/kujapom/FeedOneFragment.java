@@ -1,7 +1,10 @@
 package com.example.gunka.kujapom;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -18,7 +21,18 @@ import com.codemobiles.util.CMFeedJsonUtil;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.RequestBody;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -27,6 +41,7 @@ import java.util.Locale;
 public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitListener{
     private TextToSpeech tts;
     private ListView listview;
+    private SharedPreferences sharedPreferences;
 
     public FeedOneFragment() {
         // Required empty public constructor
@@ -66,10 +81,11 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
-                                Log.i("cp", "need to delete item ID : " + getID());
+                                Log.i("cpDelete", "need to delete item ID : " + getID());
                                 //
                                 //  DO SOMETHING
                                 //
+                                new TheTask().execute("http://10.16.68.253/kexercise.php",getID());
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -145,5 +161,53 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
     public void onDestroy() {
         super.onDestroy();
         tts.shutdown();
+    }
+
+    class TheTask extends AsyncTask<String,String,String>
+    {
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try
+            {
+                Log.i("deleteExercise", "3");
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost method = new HttpPost(params[0]);
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+
+                nameValuePairs.add(new BasicNameValuePair("type", "delete"));
+                nameValuePairs.add(new BasicNameValuePair("id", params[1]));
+                sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
+                nameValuePairs.add(new BasicNameValuePair("creator", sharedPreferences.getString("username", "")));
+
+                method.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
+
+                HttpResponse response = httpclient.execute(method);
+                HttpEntity entity = response.getEntity();
+                Log.i("deleteExercise", "4");
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                if(entity != null){
+                    Log.i("deleteExercise", "5 : " + EntityUtils.toString(entity));
+
+                    return EntityUtils.toString(entity);
+
+                }
+                else{
+                    Log.i("deleteExercise", "6");
+                    return "No string.";
+                }
+            }
+            catch(Exception e){
+                Log.i("deleteExercise", "7");
+                return "Network problem";
+            }
+
+        }
     }
 }

@@ -21,10 +21,5 @@
         android:title="เพิ่มท่าออกกำลังกาย"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_myOrder"
-        android:orderInCategory="100"
-        android:title="แก้ไข"
-        app:showAsAction="never" />
 
 </menu>
