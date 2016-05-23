@@ -5,6 +5,7 @@ package com.example.gunka.kujapom;
  */
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,11 @@ public class ListViewAdapter_kcal extends BaseAdapter {
     public String name = "";
 
 
-    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist,String Creator) {
+    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mData = arraylist;
-        name = Creator;
+
     }
 
     @Override
@@ -74,13 +75,13 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         }
         holder.ID = item.get("Menu_ID");
         convertView.setTag(holder);
-        /*if(new String(item.get("Menu_Creator").toString()).equals(name) && name != ""){
+        if(new String(item.get("Menu_Creator").toString()).equals(name) && name != ""){
             holder.icon.setImageResource(R.drawable.star);
             Log.i("iconStar", "true");
         } else {
             holder.icon.setImageResource(R.drawable.food);
             Log.i("iconStar", "false");
-        }*/
+        }
         holder.title.setText(item.get("Menu_Name"));
         holder.Description.setText(item.get("Menu_Cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(item.get("Menu_Type").toString());
@@ -113,6 +114,7 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         TextView Description;
         String ID;
         ImageView icon;
+        String creator;
     }
 }
 

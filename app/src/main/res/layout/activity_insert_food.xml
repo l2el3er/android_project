@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,36 +7,42 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.gunka.kujapom.InsertExercise">
+    tools:context="com.example.gunka.kujapom.InsertExercise"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="เพิ่มข้อมูลอาหาร"
         android:textSize="27dp"
         android:layout_marginTop="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+
+        />
 
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="ชื่อ"
         android:textSize="22sp"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
+         />
 
     <EditText
         android:id="@+id/EdtName"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/name"/>
+        android:layout_height="wrap_content"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
 
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/TxtType"
         android:layout_width="wrap_content"
@@ -44,7 +50,7 @@
         android:text="ประเภท"
         android:textSize="22sp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/EdtName"/>
+        />
 
     <Spinner
         android:id="@+id/type"
@@ -53,8 +59,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:entries="@array/food_type"
-        android:layout_below="@+id/EdtName"
-        android:layout_toRightOf="@+id/TxtType"/>
+        />
+</LinearLayout>
+
 
     <TextView
         android:id="@+id/cal"
@@ -63,37 +70,35 @@
         android:text="จำนวนแคลอรี่"
         android:textSize="22sp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/TxtType"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
     <EditText
         android:id="@+id/EdtCal"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:inputType="number"
-        android:layout_marginLeft="40dp"
-        android:layout_below="@+id/cal"/>
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="กิโลแคลอรี่"
         android:textSize="22sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_alignTop="@+id/EdtCal"
-        android:layout_toRightOf="@+id/EdtCal"/>
+
+        />
+</LinearLayout>
+
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:textSize="20sp"
         android:text="เพิ่มข้อมูล"
-        android:layout_below="@+id/EdtCal"
-        android:layout_toRightOf="@+id/cal"
-        android:layout_toEndOf="@+id/cal"
-        android:layout_marginTop="85dp" />
+         />
 
-</RelativeLayout>
+</LinearLayout>

@@ -38,6 +38,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
     private static final String API_NAME = "Menu_Name";
     private static final String API_CAL = "Menu_Cal";
     private static final String API_TYPE = "Menu_Type";
+    private static final String API_CREATOR = "Menu_Creator";
 
     ArrayList<HashMap<String, String>> jsonlist = new ArrayList<HashMap<String, String>>();
     private JSONParser jParser;
@@ -158,6 +159,9 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            //
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
+                            //
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
@@ -166,7 +170,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 }
                 sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
 
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
             }
 
@@ -196,13 +200,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
             case 2:
@@ -217,13 +222,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
 
                 break;
@@ -239,13 +245,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
             case 4:
@@ -260,13 +267,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
             case 5:
@@ -281,13 +289,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                             map.put(API_NAME, c.getString(API_NAME));
                             map.put(API_CAL, c.getString(API_CAL));
                             map.put(API_TYPE, c.getString(API_TYPE));
+                            map.put(API_CREATOR, c.getString(API_CREATOR));
                             jsonlist.add(map);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
             case 6:
@@ -302,13 +311,14 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         map.put(API_NAME, c.getString(API_NAME));
                         map.put(API_CAL, c.getString(API_CAL));
                         map.put(API_TYPE, c.getString(API_TYPE));
+                        map.put(API_CREATOR, c.getString(API_CREATOR));
                         jsonlist.add(map);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
 
                 break;
 
@@ -364,6 +374,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                     map.put(API_NAME, c.getString(API_NAME));
                     map.put(API_CAL, c.getString(API_CAL));
                     map.put(API_TYPE, c.getString(API_TYPE));
+                    map.put(API_CREATOR, c.getString(API_CREATOR));
                     jsonlist.add(map);
 
                 } catch (JSONException e) {
@@ -398,8 +409,8 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
             super.onPostExecute(s);
             Log.i("mobile", "onPostExecute: " + s);
             actv.setAdapter(adapter);
-            sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
-            listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s),sharedPreferences.getString("username", "")));
+            //sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
+            listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s)));
 
         }
     }
