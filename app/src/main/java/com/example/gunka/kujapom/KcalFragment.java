@@ -110,9 +110,11 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         return  holder.ID;
                     }
                 };
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("ต้องการที่จะลบ ?").setPositiveButton("ใช่", dialogClickListener)
-                        .setNegativeButton("ไม่", dialogClickListener).show();
+                if (holder.creator=="1") {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("ต้องการที่จะลบ ?").setPositiveButton("ใช่", dialogClickListener)
+                            .setNegativeButton("ไม่", dialogClickListener).show();
+                }
                     return false;
                 };
         });
