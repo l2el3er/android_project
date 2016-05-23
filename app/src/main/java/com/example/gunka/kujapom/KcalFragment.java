@@ -16,7 +16,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -320,7 +319,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
         if(status == TextToSpeech.SUCCESS) {
             tts.setLanguage(new Locale("th"));
             Log.i("cp", "well done !");
-            Toast.makeText(getActivity(), "tts is ready", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "tts is ready", Toast.LENGTH_SHORT).show();
            }
     }
     @Override
