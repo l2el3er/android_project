@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="เพิ่มข้อมูลท่าออกกำลัง"
+        android:text="เพิ่มข้อมูลท่าออกกำลังกาย"
         android:textSize="27sp"
         android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
@@ -72,6 +72,7 @@
         android:id="@+id/EdtCal"
         android:layout_width="100dp"
         android:layout_height="60dp"
+        android:layout_marginLeft="40dp"
         android:inputType="number"
         android:layout_below="@+id/cal"/>
 
@@ -81,7 +82,7 @@
         android:text="กิโลแคลอรี่"
         android:textSize="22sp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="40dp"
         android:layout_alignTop="@+id/EdtCal"
         android:layout_toRightOf="@+id/EdtCal"/>
 
