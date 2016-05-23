@@ -24,12 +24,14 @@ public class ListViewAdapter_kcal extends BaseAdapter {
     private final ArrayList<HashMap<String, String>> mData;
     public Context mContext;
     public LayoutInflater mInflater;
+    public String name = "";
 
 
-    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist) {
+    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist,String Creator) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mData = arraylist;
+        name = Creator;
     }
 
     @Override
@@ -54,10 +56,11 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         HashMap<String, String> item = mData.get(position);
         if (convertView == null) {
             // load layout
-            convertView = mInflater.inflate(R.layout.item_listview, null);
+            convertView = mInflater.inflate(R.layout.item_listview_kcal, null);
 
             holder = new viewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.item_listview_title);
+            holder.icon = (ImageView) convertView.findViewById(R.id.imageView);
             holder.productPicture = (ImageView) convertView.findViewById(R.id.item_listview_productPicture);
             holder.Description = (TextView) convertView.findViewById(R.id.item_listview_desc);
 
@@ -71,6 +74,13 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         }
         holder.ID = item.get("Menu_ID");
         convertView.setTag(holder);
+        /*if(new String(item.get("Menu_Creator").toString()).equals(name) && name != ""){
+            holder.icon.setImageResource(R.drawable.star);
+            Log.i("iconStar", "true");
+        } else {
+            holder.icon.setImageResource(R.drawable.food);
+            Log.i("iconStar", "false");
+        }*/
         holder.title.setText(item.get("Menu_Name"));
         holder.Description.setText(item.get("Menu_Cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(item.get("Menu_Type").toString());
@@ -102,6 +112,7 @@ public class ListViewAdapter_kcal extends BaseAdapter {
         ImageView productPicture;
         TextView Description;
         String ID;
+        ImageView icon;
     }
 }
 

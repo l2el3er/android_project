@@ -1,7 +1,6 @@
 package com.example.gunka.kujapom;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +68,7 @@ public class ListViewAdapter extends BaseAdapter {
         holder.ID = CMXmlJsonConvertor.getValue(item,"id");
         convertView.setTag(holder);
         holder.title.setText(CMXmlJsonConvertor.getValue(item, "name"));
-        Log.i("creator", name);
+
         if(new String(String.valueOf(CMXmlJsonConvertor.getValue(item, "creator"))).equals(name) && name != ""){
             holder.icon.setImageResource(R.drawable.star);
         } else {
