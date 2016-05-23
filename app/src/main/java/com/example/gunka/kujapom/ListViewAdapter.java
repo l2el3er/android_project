@@ -67,14 +67,18 @@ public class ListViewAdapter extends BaseAdapter {
 
         }
         holder.ID = CMXmlJsonConvertor.getValue(item,"id");
-        convertView.setTag(holder);
+       // holder.creator
+
         holder.title.setText(CMXmlJsonConvertor.getValue(item, "name"));
         Log.i("creator", name);
         if(new String(String.valueOf(CMXmlJsonConvertor.getValue(item, "creator"))).equals(name) && name != ""){
             holder.icon.setImageResource(R.drawable.star);
+            holder.creator = "1";
         } else {
             holder.icon.setImageResource(R.drawable.food);
+            holder.creator = "0";
         }
+        convertView.setTag(holder);
         holder.Description.setText(CMXmlJsonConvertor.getValue(item,"cal") + " กิโลแคลอรี่");
         int myNum = Integer.parseInt(CMXmlJsonConvertor.getValue(item,"type"));
         switch (myNum) {
@@ -96,6 +100,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView Description;
         String ID;
         ImageView icon;
+        String creator;
     }
 
 }

@@ -75,6 +75,7 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 final ListViewAdapter.viewHolder holder = (ListViewAdapter.viewHolder) view.getTag();
+                //Log.i("cp", String.valueOf(holder.creator));
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -82,9 +83,7 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
                                 Log.i("cpDelete", "need to delete item ID : " + getID());
-                                //
-                                //  DO SOMETHING
-                                //
+
                                 new TheTask().execute("http://10.16.68.253/kexercise.php",getID());
                                 break;
 
@@ -98,9 +97,11 @@ public class FeedOneFragment extends Fragment implements TextToSpeech.OnInitList
                         return holder.ID;
                     }
                 };
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("ต้องการที่จะลบ ?").setPositiveButton("ใช่", dialogClickListener)
-                        .setNegativeButton("ไม่", dialogClickListener).show();
+                if (holder.creator=="1") {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("ต้องการที่จะลบ ?").setPositiveButton("ใช่", dialogClickListener)
+                            .setNegativeButton("ไม่", dialogClickListener).show();
+                }
                 return false;
             }
 
