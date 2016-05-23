@@ -172,7 +172,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                 }
                 sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
 
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
             }
 
@@ -209,7 +209,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
                 break;
             case 2:
@@ -231,7 +231,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
 
                 break;
@@ -254,7 +254,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
                 break;
             case 4:
@@ -276,7 +276,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
                 break;
             case 5:
@@ -298,7 +298,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
                 break;
             case 6:
@@ -320,7 +320,7 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
                         e.printStackTrace();
                     }
                 }
-                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist)));
+                listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(jsonlist),sharedPreferences.getString("username", "")));
 
                 break;
 
@@ -411,8 +411,8 @@ public class KcalFragment extends Fragment implements AdapterView.OnItemSelected
             super.onPostExecute(s);
             Log.i("mobile", "onPostExecute: " + s);
             actv.setAdapter(adapter);
-            //sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
-            listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s)));
+            sharedPreferences = getActivity().getSharedPreferences("MY_PREFERENCE", Context.MODE_PRIVATE);
+            listview.setAdapter(new ListViewAdapter_kcal(getActivity(), new ArrayList<HashMap<String, String>>(s),sharedPreferences.getString("username", "")));
 
         }
     }

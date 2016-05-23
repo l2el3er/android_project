@@ -5,6 +5,7 @@ package com.example.gunka.kujapom;
  */
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,11 @@ public class ListViewAdapter_kcal extends BaseAdapter {
     public String name = "";
 
 
-    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist) {
+    public ListViewAdapter_kcal(Context context, ArrayList<HashMap<String, String>> arraylist,String Creator) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
         mData = arraylist;
+        name = Creator;
 
     }
 
@@ -73,8 +75,10 @@ public class ListViewAdapter_kcal extends BaseAdapter {
 
         }
         holder.ID = item.get("Menu_ID");
+        Log.i("cp",item.get("Menu_Creator"));
+        Log.i("cp",name);
 
-        if(new String(item.get("Menu_Creator").toString()).equals(name) && name != ""){
+        if(new String(item.get("Menu_Creator")).equals(name) && name != ""){
             holder.icon.setImageResource(R.drawable.star);
             holder.creator = "1";
         } else {
